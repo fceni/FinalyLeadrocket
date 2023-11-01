@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Bonjour </h1>
+
+
+<h1> Vote pour ta video preferée du mois !!</h1>
+
+
+
+    <div>{{ "now" | date('Y-m-d')}} </div>
+    <br>
+    <br>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ asset('style.css') }}">
+        <title>Compte à Rebours d'un Mois</title>
+    </head>
+
+
+        <title>Vote pour ta videos du mois !! </title>
+        <style>
+
+        </style>
+
+
+    <body>
+    <title>Compte à Rebours d'un Mois</title>
+    <br>
+    <div class="countdown">
+        <span id="days">00</span> jour
+        <span id="hours">00</span> heures
+        <span id="minutes">00</span> minutes
+    </div>
+{#        {{ interval.format('%m mois,%d jours, %h heures, %i minutes, %s secondes') }}#}
+
+{#    </div>#}
+{#    <div class="countdown">#}
+{#        {{ interval.format('%m mois, %d jours, %h heures') }}#}
+{#    </div>#}
+   <script src="{{ asset('script.js') }}"></script>
+
+    <br>
+    <br>
+    <div class="video-container">
+        <video class="video" controls>
+            <source src="video1.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo.
+        </video>
+        <br>
+        <button class="btn-vote" onclick="vote('video1')">Votez pour la vidéo 1</button>
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-bar-inner"></div>
+        </div>
+    </div>
+        <p>texte</p>
+    </div>
+
+    <div class="video-container">
+        <video class="video" controls>
+            <source src="video2.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo.
+        </video>
+        <br>
+        <button class="btn-vote" onclick="vote('video2')">Votez pour la vidéo 2</button>
+        <p>Texte</p>
+    </div>
+
+
+    <div class="video-container">
+        <video class="video" controls>
+            <source src="video3.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo.
+        </video>
+        <br>
+        <button class="btn-vote" onclick="vote('video3')">Votez pour la vidéo 3</button>
+        <p>Texte</p>
+    </div>
+    <script>
+        let voted = false;
+
+        function vote(videoId) {
+            if (!voted) {
+                voted = true;
+                alert('Vous avez voté pour la ' + videoId);
+                // Enregistrez le vote ici, par exemple en envoyant une requête à un serveur
+            } else {
+                alert('Vous avez déjà voté');
+            }
+        }
+
+        // function vote(videoId) {
+        //     if (!voted) {
+        //         voted = true;
+        //         // Enregistrez le vote en envoyant une requête AJAX
+        //         fetch('/record-vote', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/x-www-form-urlencoded'
+        //             },
+        //             body: `videoId=${videoId}`
+        //         })
+        //             .then(response => response.text())
+        //             .then(data => {
+        //                 alert(data);
+        //             });
+        //     } else {
+        //         alert('Vous avez déjà voté');
+        //     }
+        // }
+
+    </script>
+    </body>
+    </html>
+
+
+
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Test
+{% endblock %}

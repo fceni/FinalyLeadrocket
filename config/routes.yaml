@@ -1,0 +1,10 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+# config/routes.yaml
+record_vote:
+  path: /record-vote
+  controller: App\Controller\VoteController::recordVoteAction
+  methods: [POST]
+

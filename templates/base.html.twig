@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} PROJECT LEADROCKET {% endblock %}</title>
+    <link rel="icon" href="{{ asset('img/logo.jpg') }}">
+    <link rel="stylesheet" href="{{ asset('normalize.css') }}">
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+
+
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1><a href="{{ path('main_home') }}"><img src="{{ asset('img/logo.svg') }}" alt="immo"></a> </h1>
+        {{ include('menu/nav.html.twig') }}
+    </header>
+
+    <main>
+        {% block body %} c'est la base {% endblock %}
+    </main>
+</div>
+
+
+</body>
+</html>
