@@ -33,7 +33,7 @@ class VoteController extends AbstractController
             $entityManager->persist($vote);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_vote_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_vote_index');
         }
 
         return $this->renderForm('vote/new.html.twig', [
@@ -59,7 +59,7 @@ class VoteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_vote_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_vote_index');
         }
 
         return $this->renderForm('vote/edit.html.twig', [
@@ -76,6 +76,30 @@ class VoteController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_vote_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_vote_index');
+    }
+
+    #[Route('/update/{id}', name: 'vote_update', methods: ['PUT'])]
+    public function update(Request $request, Vote $vote, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérez les données de la requête JSON
+        $data = json_decode($request->getContent(), true);
+
+        // Vérifiez que les données requises sont présentes
+        if (!isset($data['name']) || !isset($data['backdrop'])) {
+            return $this->json(['message' => 'Données invalides'], Response::HTTP_BAD_REQUEST);
+        }
+
+        // Mettez à jour les propriétés du vote avec les nouvelles données
+        $vote->setName($data['name']);
+        $vote->setBackdrop($data['backdrop']);
+
+        // Enregistrez les modifications en base de données
+        $entityManager->flush();
+
+        // Redirigez l'utilisateur vers une page de confirmation ou une autre page appropriée
+        // Dans cet exemple, nous redirigeons l'utilisateur vers la page de détails du vote mis à jour
+        return $this->redirectToRoute('app_vote_show', ['id' => $vote->getId()]);
+
     }
 }
