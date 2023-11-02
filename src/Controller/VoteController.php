@@ -102,4 +102,19 @@ class VoteController extends AbstractController
         return $this->redirectToRoute('app_vote_show', ['id' => $vote->getId()]);
 
     }
+
+    #[Route('/add', name: 'video_add')]
+    public function add(EntityManagerInterface $entityManager): Response
+    {
+        $vote = new Vote();
+        $vote
+            ->setName('Videoludique')
+            ->setBackdrop('backdrop.png')
+            ->setDateCreated(new \DateTime());
+
+            $entityManager->persist($vote);
+            //$entityManager->flush();
+    
+            return $this->render("main/add.html.twig");
+    }
 }

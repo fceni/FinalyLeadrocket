@@ -19,27 +19,4 @@ class MainController extends AbstractController
 
         return $this->render("main/home.html.twig");
     }
-
-    #[Route('/test', name: 'main_test')]
-    public function test(): Response
-    {
-
-        return $this->render("main/test.html.twig");
-
-    }
-
-    #[Route('/add', name: 'main_add')]
-    public function add(EntityManagerInterface $entityManager): Response
-    {
-        $vote = new Vote();
-        $vote
-            ->setName('Videoludique')
-            ->setBackdrop('backdrop.png')
-            ->setDateCreated(new \DateTime());
-
-            $entityManager->persist($vote);
-            //$entityManager->flush();
-    
-            return $this->render("main/add.html.twig");
-    }
 }
